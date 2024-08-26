@@ -1,4 +1,11 @@
-# Main entrypoint of the workflow. 
-# Please follow the best practices: 
-# https://snakemake.readthedocs.io/en/stable/snakefiles/best_practices.html,
-# in particular regarding the standardized folder structure mentioned there. 
+import pandas as pd
+
+# Minimal checks for valid parameter values
+assert isinstance(config["lapa_disable_internal_priming_filter"], bool), f"'disable_internal_priming_filter' must be True/False boolean, {config['disable_internal_priming_filter']} (type {type(config['disable_internal_priming_filter'])}) was provided"
+assert config["lapa_counting_method"] in ["end", "tail"]
+
+include: "rules/lapa.smk"
+
+rule all:
+    input:
+        rules.lapa.output
