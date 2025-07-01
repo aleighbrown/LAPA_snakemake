@@ -27,6 +27,9 @@ rule lapa:
     conda:
         "../envs/lapa_fork.yaml"
 
+    container:
+        "docker://ghcr.io/sambryce-smith/lapa:0.0.7"
+
     log:
         stdout = os.path.join(config["main_output_dir"], "logs", "lapa", "lapa.stdout.log"),
         stderr = os.path.join(config["main_output_dir"], "logs", "lapa", "lapa.stderr.log")
